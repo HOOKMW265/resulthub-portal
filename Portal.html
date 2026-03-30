@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Examination Results Portal</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  padding:0;
+
+  /* EDUCATION PATTERN BACKGROUND */
+  background-color:#f4f6f8;
+  background-image:url('pattern.png');
+  background-size:350px;
+  background-repeat:repeat;
+}
+
+/* MAIN CARD */
+.container{
+  width:95%;
+  max-width:480px;
+  margin:30px auto;
+  padding:22px;
+  background-color:rgba(255,255,255,0.96);
+  border-radius:8px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.logo{
+  width:110px;
+  display:block;
+  margin:0 auto 10px;
+}
+
+h2{
+  margin:2px 0;
+  font-size:20px;
+  text-align:center;
+  color:#222;
+}
+
+.subtitle{
+  text-align:center;
+  color:#0f7a41;
+  font-style:italic;
+  font-size:14px;
+  margin-bottom:15px;
+}
+
+/* FORM */
+label{
+  display:block;
+  margin-top:14px;
+  font-weight:bold;
+  font-size:14px;
+  color:#333;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  font-size:16px;
+  border:1px solid #bbb;
+  border-radius:5px;
+}
+
+input:focus{
+  outline:none;
+  border-color:#0f7a41;
+  box-shadow:0 0 0 2px rgba(15,122,65,0.15);
+}
+
+button{
+  width:100%;
+  padding:13px;
+  margin-top:22px;
+  background-color:#0f7a41;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+button:hover{
+  background-color:#0d6a38;
+}
+
+/* RESULTS */
+.results{
+  display:none;
+  margin-top:20px;
+}
+
+.student-info{
+  text-align:center;
+  font-weight:bold;
+  color:#0f7a41;
+  margin-bottom:10px;
+  font-size:16px;
+}
+
+.iframe-wrapper{
+  width:100%;
+  height:70vh;
+  border:1px solid #ccc;
+  border-radius:6px;
+  overflow:hidden;
+  background:#fff;
+}
+
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+footer{
+  text-align:center;
+  margin:25px 0;
+  color:#777;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <img src="logo.png" class="logo" alt="School Logo">
+
+  <h2>Blantyre Secondary School</h2>
+  <h2>Examination Results Portal</h2>
+  <div class="subtitle">"Success Comes Through Discipline"</div>
+
+  <!-- FORM -->
+  <form id="resultForm">
+    <label for="examNo">Examination Number</label>
+    <input type="text" id="examNo" required placeholder="Enter your examination number">
+
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" required>
+
+    <button type="submit">View Report</button>
+  </form>
+
+  <!-- RESULTS -->
+  <div class="results" id="resultsDiv">
+    <div class="student-info" id="studentInfo"></div>
+    <div class="iframe-wrapper">
+      <iframe id="reportFrame"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 – Blantyre Secondary School</footer>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbzUeWYpbtWh0hgFxAOynQk2bYWt_YrweaYjTMsa1JIF7aCIihAPM506z1tjp3MaWFLQ/exec";
+
+const form = document.getElementById("resultForm");
+const resultsDiv = document.getElementById("resultsDiv");
+const studentInfo = document.getElementById("studentInfo");
+const reportFrame = document.getElementById("reportFrame");
+
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const examNo = document.getElementById("examNo").value.trim();
+  const dob = new Date(document.getElementById("dob").value)
+              .toISOString().split("T")[0];
+
+  const url = `${API_URL}?examNo=${examNo}&dob=${dob}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!data.success) {
+      alert("No report found for the entered details.");
+      return;
+    }
+
+    const driveLink = `https://drive.google.com/file/d/${data.fileId}/preview`;
+
+    studentInfo.textContent = "Examination Report – " + examNo;
+    reportFrame.src = driveLink;
+
+    form.style.display = "none";
+    resultsDiv.style.display = "block";
+
+  } catch (err) {
+    alert("Something went wrong. Try again.");
+  }
+});
+</script>
+
+</body>
+</html>
