@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Examination Results Portal</title>
+
 <style>
-/* ========= THEME VARIABLES (Dynamic Colors) ========= */
+/* ========= THEME VARIABLES ========= */
 :root{
-  --primary:#0b63ce;        /* ResultsHub blue */
-  --accent:#f28c18;         /* ResultsHub orange */
+  --primary:#0b63ce;
+  --accent:#f28c18;
   --success:#0f7a41;
   --bg1:#eef3f9;
   --bg2:#fdfefe;
@@ -22,12 +23,38 @@
 *{ box-sizing:border-box; }
 
 body{
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-family:'Segoe UI', Tahoma, sans-serif;
   margin:0;
   color:var(--text);
-
-  /* Dynamic gradient background */
   background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  transition:background 0.3s, color 0.3s;
+}
+
+/* Animated pattern */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url('pattern.png');
+  background-size:300px;
+  opacity:0.04;
+  animation:moveBg 60s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes moveBg{
+  from{ background-position:0 0; }
+  to{ background-position:1000px 1000px; }
+}
+
+/* ========= DARK MODE ========= */
+body.dark{
+  --bg1:#0f172a;
+  --bg2:#0b1220;
+  --card:#111827;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --border:#1f2937;
 }
 
 /* ========= MAIN CARD ========= */
@@ -40,13 +67,23 @@ body{
   border-radius:12px;
   box-shadow:0 12px 30px rgba(0,0,0,0.08);
   border:1px solid var(--border);
-  transition:0.3s ease;
+  position:relative;
 }
 
 .logo{
   width:115px;
   display:block;
   margin:0 auto 12px;
+}
+
+/* Dark mode toggle */
+.theme-toggle{
+  position:absolute;
+  top:15px;
+  right:15px;
+  cursor:pointer;
+  font-size:13px;
+  color:var(--muted);
 }
 
 /* ========= TITLES ========= */
@@ -89,7 +126,6 @@ input{
   font-size:16px;
   border:1px solid var(--border);
   border-radius:6px;
-  transition:0.2s ease;
 }
 
 input:focus{
@@ -110,12 +146,27 @@ button{
   border:none;
   border-radius:6px;
   cursor:pointer;
-  transition:0.25s ease;
 }
 
 button:hover{
   transform:translateY(-2px);
   box-shadow:0 8px 18px rgba(11,99,206,0.25);
+}
+
+/* ========= LOADER ========= */
+.loader{
+  display:none;
+  margin:18px auto;
+  border:6px solid #e5e7eb;
+  border-top:6px solid var(--primary);
+  border-radius:50%;
+  width:42px;
+  height:42px;
+  animation:spin 0.8s linear infinite;
+}
+
+@keyframes spin{
+  to{ transform:rotate(360deg); }
 }
 
 /* ========= RESULTS ========= */
@@ -154,11 +205,12 @@ footer{
 <body>
 
 <div class="container">
-  <img src="logo.png" class="logo" alt="School Logo">
+  <img src="logo.png" class="logo" alt="ResultsHub Logo">
+  <div class="theme-toggle" onclick="toggleTheme()">🌙 Dark mode</div>
 
   <h2>ResultsHub</h2>
-<h2>Examination Results Portal</h2>
-<div class="subtitle">Fast • Secure • Reliable</div>
+  <h2>Examination Results Portal</h2>
+  <div class="subtitle">Fast • Secure • Reliable</div>
 
   <!-- FORM -->
   <form id="resultForm">
@@ -170,6 +222,9 @@ footer{
 
     <button type="submit">View Report</button>
   </form>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader"></div>
 
   <!-- RESULTS -->
   <div class="results" id="resultsDiv">
@@ -189,9 +244,18 @@ const form = document.getElementById("resultForm");
 const resultsDiv = document.getElementById("resultsDiv");
 const studentInfo = document.getElementById("studentInfo");
 const reportFrame = document.getElementById("reportFrame");
+const loader = document.getElementById("loader");
 
+/* Dark mode */
+function toggleTheme(){
+  document.body.classList.toggle("dark");
+}
+
+/* Submit */
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
+
+  loader.style.display = "block";
 
   const examNo = document.getElementById("examNo").value.trim();
   const dob = new Date(document.getElementById("dob").value)
@@ -202,6 +266,8 @@ form.addEventListener("submit", async function (e) {
   try {
     const res = await fetch(url);
     const data = await res.json();
+
+    loader.style.display = "none";
 
     if (!data.success) {
       alert("No report found for the entered details.");
@@ -217,6 +283,7 @@ form.addEventListener("submit", async function (e) {
     resultsDiv.style.display = "block";
 
   } catch (err) {
+    loader.style.display = "none";
     alert("Something went wrong. Try again.");
   }
 });
