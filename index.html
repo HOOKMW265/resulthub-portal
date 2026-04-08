@@ -5,108 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Examination Results Portal</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-  /* ========= RESPONSIVE / DEVICE ADAPTIVE ========= */
 
-/* Tablets */
-@media (max-width: 900px){
-  .container{
-    margin:30px 18px;
-    padding:22px;
-  }
-
-  h2{
-    font-size:18px;
-  }
-
-  .iframe-wrapper{
-    height:65vh;
-  }
-}
-
-/* Phones */
-@media (max-width: 600px){
-  body{
-    background:var(--bg2);
-  }
-
-  .container{
-    width:100%;
-    margin:0;
-    min-height:100vh;
-    border-radius:0;
-    box-shadow:none;
-    border:none;
-    padding:22px 18px 40px;
-  }
-
-  .logo{
-    width:95px;
-  }
-
-  h2{
-    font-size:17px;
-  }
-
-  .subtitle{
-    font-size:13px;
-  }
-
-  label{
-    font-size:13px;
-  }
-
-  input{
-    font-size:15px;
-    padding:11px;
-  }
-
-  button{
-    font-size:15px;
-    padding:13px;
-  }
-
-  .iframe-wrapper{
-    height:72vh;
-    border-radius:6px;
-  }
-
-  footer{
-    margin:18px 0;
-    font-size:12px;
-  }
-}
-
-/* Very small phones */
-@media (max-width: 380px){
-  h2{ font-size:16px; }
-  .logo{ width:85px; }
-}
-/* ========= THEME VARIABLES ========= */
+/* ========= THEME VARIABLES (PROFESSIONAL PALETTE) ========= */
 :root{
-  --primary:#0b63ce;
-  --accent:#f28c18;
-  --success:#0f7a41;
-  --bg1:#eef3f9;
-  --bg2:#fdfefe;
-  --text:#1f2933;
-  --muted:#6b7280;
+  --primary:#1e3a8a;
+  --accent:#f59e0b;
+  --success:#15803d;
+
+  --bg1:#f8fafc;
+  --bg2:#eef2f7;
+
+  --text:#0f172a;
+  --muted:#64748b;
+
   --card:#ffffff;
-  --border:#e5e7eb;
+  --border:#e2e8f0;
 }
 
 /* ========= GLOBAL ========= */
 *{ box-sizing:border-box; }
 
 body{
-  font-family:'Segoe UI', Tahoma, sans-serif;
+  font-family:'Inter', sans-serif;
+  letter-spacing:0.2px;
   margin:0;
   color:var(--text);
   background:linear-gradient(135deg,var(--bg1),var(--bg2));
   transition:background 0.3s, color 0.3s;
 }
 
-/* Animated pattern */
+/* Animated background */
 body::before{
   content:"";
   position:fixed;
@@ -133,23 +64,23 @@ body.dark{
   --border:#1f2937;
 }
 
-/* ========= MAIN CARD ========= */
+/* ========= CONTAINER ========= */
 .container{
   width:95%;
-  max-width:480px;
-  margin:40px auto;
-  padding:26px;
+  max-width:500px;
+  margin:50px auto;
+  padding:30px;
   background:var(--card);
-  border-radius:12px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  border-radius:14px;
+  box-shadow:0 20px 40px rgba(2,6,23,0.08);
   border:1px solid var(--border);
   position:relative;
 }
 
 .logo{
-  width:115px;
+  width:110px;
   display:block;
-  margin:0 auto 12px;
+  margin:0 auto 14px;
 }
 
 /* Dark mode toggle */
@@ -164,19 +95,22 @@ body.dark{
 
 /* ========= TITLES ========= */
 h2{
-  margin:2px 0;
-  font-size:20px;
+  margin:3px 0;
   text-align:center;
+  letter-spacing:0.4px;
 }
 
 h2:first-of-type{
   color:var(--primary);
   font-weight:700;
+  font-size:22px;
 }
 
 h2:last-of-type{
   color:var(--muted);
   font-weight:500;
+  font-size:15px;
+  text-transform:uppercase;
 }
 
 .subtitle{
@@ -197,17 +131,19 @@ label{
 
 input{
   width:100%;
-  padding:12px;
+  padding:13px;
   margin-top:6px;
-  font-size:16px;
+  font-size:15px;
   border:1px solid var(--border);
-  border-radius:6px;
+  border-radius:8px;
+  background:#f9fbfd;
 }
 
 input:focus{
+  background:white;
   outline:none;
   border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(11,99,206,0.15);
+  box-shadow:0 0 0 3px rgba(30,58,138,0.12);
 }
 
 /* ========= BUTTON ========= */
@@ -215,18 +151,18 @@ button{
   width:100%;
   padding:14px;
   margin-top:24px;
-  background:linear-gradient(90deg,var(--primary),#094ea8);
+  background:var(--primary);
   color:white;
-  font-size:16px;
-  font-weight:700;
+  font-size:15px;
+  font-weight:600;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
+  transition:0.25s ease;
 }
 
 button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 18px rgba(11,99,206,0.25);
+  background:#162c6b;
 }
 
 /* ========= LOADER ========= */
@@ -275,6 +211,18 @@ footer{
   color:var(--muted);
   font-size:13px;
 }
+
+/* ========= RESPONSIVE ========= */
+@media (max-width:600px){
+  .container{
+    width:100%;
+    margin:0;
+    min-height:100vh;
+    border-radius:0;
+    box-shadow:none;
+    border:none;
+  }
+}
 </style>
 </head>
 
@@ -288,7 +236,6 @@ footer{
   <h2>Examination Results Portal</h2>
   <div class="subtitle">Fast • Secure • Reliable</div>
 
-  <!-- FORM -->
   <form id="resultForm">
     <label for="examNo">Examination Number</label>
     <input type="text" id="examNo" required placeholder="Enter your examination number">
@@ -299,10 +246,8 @@ footer{
     <button type="submit">View Report</button>
   </form>
 
-  <!-- LOADER -->
   <div class="loader" id="loader"></div>
 
-  <!-- RESULTS -->
   <div class="results" id="resultsDiv">
     <div class="student-info" id="studentInfo"></div>
     <div class="iframe-wrapper">
@@ -322,27 +267,21 @@ const studentInfo = document.getElementById("studentInfo");
 const reportFrame = document.getElementById("reportFrame");
 const loader = document.getElementById("loader");
 
-/* Dark mode */
 function toggleTheme(){
   document.body.classList.toggle("dark");
 }
 
-/* Submit */
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
-
   loader.style.display = "block";
 
   const examNo = document.getElementById("examNo").value.trim();
-  const dob = new Date(document.getElementById("dob").value)
-              .toISOString().split("T")[0];
-
+  const dob = new Date(document.getElementById("dob").value).toISOString().split("T")[0];
   const url = `${API_URL}?examNo=${examNo}&dob=${dob}`;
 
   try {
     const res = await fetch(url);
     const data = await res.json();
-
     loader.style.display = "none";
 
     if (!data.success) {
@@ -350,15 +289,13 @@ form.addEventListener("submit", async function (e) {
       return;
     }
 
-    const driveLink = `https://drive.google.com/file/d/${data.fileId}/preview`;
-
+    reportFrame.src = `https://drive.google.com/file/d/${data.fileId}/preview`;
     studentInfo.textContent = "Examination Report – " + examNo;
-    reportFrame.src = driveLink;
 
     form.style.display = "none";
     resultsDiv.style.display = "block";
 
-  } catch (err) {
+  } catch {
     loader.style.display = "none";
     alert("Something went wrong. Try again.");
   }
