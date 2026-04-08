@@ -4,63 +4,82 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Examination Results Portal</title>
-
 <style>
-*{
-  box-sizing:border-box;
+/* ========= THEME VARIABLES (Dynamic Colors) ========= */
+:root{
+  --primary:#0b63ce;        /* ResultsHub blue */
+  --accent:#f28c18;         /* ResultsHub orange */
+  --success:#0f7a41;
+  --bg1:#eef3f9;
+  --bg2:#fdfefe;
+  --text:#1f2933;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --border:#e5e7eb;
 }
+
+/* ========= GLOBAL ========= */
+*{ box-sizing:border-box; }
 
 body{
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
   margin:0;
-  padding:0;
+  color:var(--text);
 
-  /* EDUCATION PATTERN BACKGROUND */
-  background-color:#f4f6f8;
-  background-image:url('pattern.png');
-  background-size:350px;
-  background-repeat:repeat;
+  /* Dynamic gradient background */
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
 }
 
-/* MAIN CARD */
+/* ========= MAIN CARD ========= */
 .container{
   width:95%;
   max-width:480px;
-  margin:30px auto;
-  padding:22px;
-  background-color:rgba(255,255,255,0.96);
-  border-radius:8px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  margin:40px auto;
+  padding:26px;
+  background:var(--card);
+  border-radius:12px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  border:1px solid var(--border);
+  transition:0.3s ease;
 }
 
 .logo{
-  width:110px;
+  width:115px;
   display:block;
-  margin:0 auto 10px;
+  margin:0 auto 12px;
 }
 
+/* ========= TITLES ========= */
 h2{
   margin:2px 0;
   font-size:20px;
   text-align:center;
-  color:#222;
+}
+
+h2:first-of-type{
+  color:var(--primary);
+  font-weight:700;
+}
+
+h2:last-of-type{
+  color:var(--muted);
+  font-weight:500;
 }
 
 .subtitle{
   text-align:center;
-  color:#0f7a41;
+  color:var(--accent);
   font-style:italic;
   font-size:14px;
-  margin-bottom:15px;
+  margin-bottom:18px;
 }
 
-/* FORM */
+/* ========= FORM ========= */
 label{
   display:block;
   margin-top:14px;
-  font-weight:bold;
+  font-weight:600;
   font-size:14px;
-  color:#333;
 }
 
 input{
@@ -68,66 +87,65 @@ input{
   padding:12px;
   margin-top:6px;
   font-size:16px;
-  border:1px solid #bbb;
-  border-radius:5px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  transition:0.2s ease;
 }
 
 input:focus{
   outline:none;
-  border-color:#0f7a41;
-  box-shadow:0 0 0 2px rgba(15,122,65,0.15);
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(11,99,206,0.15);
 }
 
+/* ========= BUTTON ========= */
 button{
   width:100%;
-  padding:13px;
-  margin-top:22px;
-  background-color:#0f7a41;
+  padding:14px;
+  margin-top:24px;
+  background:linear-gradient(90deg,var(--primary),#094ea8);
   color:white;
   font-size:16px;
-  font-weight:bold;
+  font-weight:700;
   border:none;
-  border-radius:5px;
+  border-radius:6px;
   cursor:pointer;
+  transition:0.25s ease;
 }
 
 button:hover{
-  background-color:#0d6a38;
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(11,99,206,0.25);
 }
 
-/* RESULTS */
+/* ========= RESULTS ========= */
 .results{
   display:none;
-  margin-top:20px;
+  margin-top:22px;
 }
 
 .student-info{
   text-align:center;
-  font-weight:bold;
-  color:#0f7a41;
-  margin-bottom:10px;
+  font-weight:700;
+  color:var(--success);
+  margin-bottom:12px;
   font-size:16px;
 }
 
 .iframe-wrapper{
   width:100%;
   height:70vh;
-  border:1px solid #ccc;
-  border-radius:6px;
+  border:1px solid var(--border);
+  border-radius:8px;
   overflow:hidden;
   background:#fff;
 }
 
-iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-
+/* ========= FOOTER ========= */
 footer{
   text-align:center;
-  margin:25px 0;
-  color:#777;
+  margin:30px 0;
+  color:var(--muted);
   font-size:13px;
 }
 </style>
