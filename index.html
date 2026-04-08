@@ -6,6 +6,82 @@
 <title>Examination Results Portal</title>
 
 <style>
+  /* ========= RESPONSIVE / DEVICE ADAPTIVE ========= */
+
+/* Tablets */
+@media (max-width: 900px){
+  .container{
+    margin:30px 18px;
+    padding:22px;
+  }
+
+  h2{
+    font-size:18px;
+  }
+
+  .iframe-wrapper{
+    height:65vh;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px){
+  body{
+    background:var(--bg2);
+  }
+
+  .container{
+    width:100%;
+    margin:0;
+    min-height:100vh;
+    border-radius:0;
+    box-shadow:none;
+    border:none;
+    padding:22px 18px 40px;
+  }
+
+  .logo{
+    width:95px;
+  }
+
+  h2{
+    font-size:17px;
+  }
+
+  .subtitle{
+    font-size:13px;
+  }
+
+  label{
+    font-size:13px;
+  }
+
+  input{
+    font-size:15px;
+    padding:11px;
+  }
+
+  button{
+    font-size:15px;
+    padding:13px;
+  }
+
+  .iframe-wrapper{
+    height:72vh;
+    border-radius:6px;
+  }
+
+  footer{
+    margin:18px 0;
+    font-size:12px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px){
+  h2{ font-size:16px; }
+  .logo{ width:85px; }
+}
 /* ========= THEME VARIABLES ========= */
 :root{
   --primary:#0b63ce;
