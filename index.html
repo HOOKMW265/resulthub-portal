@@ -19,17 +19,25 @@
   --card:#ffffff;
   --border:#e2e8f0;
 
-  /* ✅ Neon accents */
   --neon:#3b82f6;
   --neon-soft:rgba(59,130,246,0.25);
 }
+
 *{ box-sizing:border-box; }
 
 body{
   font-family:'Inter', sans-serif;
   margin:0;
   color:var(--text);
-  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+
+  /* ✅ Pattern + gradient background */
+  background:
+  url("data:image/svg+xml;utf8,
+  <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'>
+    <circle cx='40' cy='40' r='14' fill='none' stroke='%23f59e0b' stroke-width='2' opacity='0.15'/>
+  </svg>"),
+  linear-gradient(135deg,var(--bg1),var(--bg2));
+  background-repeat: repeat;
 }
 
 body.dark{
@@ -39,6 +47,14 @@ body.dark{
   --text:#e5e7eb;
   --muted:#9ca3af;
   --border:#1f2937;
+
+  background:
+  url("data:image/svg+xml;utf8,
+  <svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'>
+    <circle cx='40' cy='40' r='14' fill='none' stroke='%23f59e0b' stroke-width='2' opacity='0.12'/>
+  </svg>"),
+  linear-gradient(135deg,var(--bg1),var(--bg2));
+  background-repeat: repeat;
 }
 
 .container{
@@ -53,7 +69,6 @@ body.dark{
   position:relative;
 }
 
-/* ✅ Neon glow behind card */
 .container::before{
   content:"";
   position:absolute;
@@ -120,7 +135,6 @@ input{
   background:#f9fbfd;
 }
 
-/* ✅ Neon input focus */
 input:focus{
   background:white;
   outline:none;
@@ -129,7 +143,6 @@ input:focus{
              0 0 12px var(--neon-soft);
 }
 
-/* ✅ Premium glowing button */
 button{
   width:100%;
   padding:14px;
@@ -175,7 +188,6 @@ button:hover{
   font-size:16px;
 }
 
-/* ✅ Premium viewer depth */
 .iframe-wrapper{
   width:100%;
   height:70vh;
@@ -192,7 +204,7 @@ footer{
   color:var(--muted);
   font-size:13px;
 }
-</style>
+</style>>
 </head>
 
 <body>
