@@ -234,11 +234,25 @@ button[type="submit"]:hover{
   box-shadow:0 10px 30px rgba(2,6,23,0.12);
 }
 
-footer{
+.container-footer{
+  margin-top:28px;
+  padding-top:18px;
+  border-top:1px solid var(--border);
   text-align:center;
-  margin:30px 0;
   color:var(--muted);
   font-size:13px;
+}
+
+.container-footer a{
+  color:var(--primary);
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s ease;
+}
+
+.container-footer a:hover{
+  color:var(--accent);
+  text-decoration:underline;
 }
 </style>
 </head>
@@ -284,7 +298,7 @@ footer{
       <a id="downloadBtn" target="_blank" style="
         display:inline-block;
         padding:10px 18px;
-        background:#B30B00;;
+        background:#B30B00;
         color:white;
         font-weight:600;
         border-radius:6px;
@@ -292,30 +306,15 @@ footer{
         Download Report (PDF)
       </a>
     </div>
-    <hr style="
-    margin-top:28px;
-    border:none;
-    border-top:1px solid var(--border);
-">
-
-<footer style="
-    text-align:center;
-    padding-top:14px;
-    color:var(--muted);
-    font-size:14px;
-">
-    © 2026 ResultsHub •
-    <a href="https://wa.me/265888735511"
-       target="_blank"
-       style="
-         color:var(--accent);
-         text-decoration:none;
-         font-weight:700;
-       ">
-       JK DIGITAL HUB
-    </a>
-</footer>
   </div>
+
+  <footer class="container-footer">
+    © 2026 ResultsHub Portal •
+    <a href="https://wa.me/265888735511" target="_blank">
+      JK DIGITAL HUB
+    </a>
+  </footer>
+</div>
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzUeWYpbtWh0hgFxAOynQk2bYWt_YrweaYjTMsa1JIF7aCIihAPM506z1tjp3MaWFLQ/exec";
